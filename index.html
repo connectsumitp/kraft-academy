@@ -51,12 +51,12 @@ padding:15px 20px;
 display:flex;
 align-items:center;
 gap:10px;
-font-weight:100;
-font-size:50px;
+font-weight:700;
+font-size:20px;
 }
 
 .logo img{
-width:50px;
+width:35px;
 }
 
 .nav-links a{
@@ -296,7 +296,7 @@ display:none;
 
 <div class="logo">
 
-<img src="https://github.com/connectsumitp/kraft-academy/blob/main/images/logo.png">
+<img src="https://cdn-icons-png.flaticon.com/512/3135/3135755.png">
 
 <span>Kraft Academy</span>
 
@@ -463,22 +463,18 @@ Register Coding Demo
 
 <h2>Book Free Demo</h2>
 
-<form>
+<form id="demoForm">
 
-<input type="text" placeholder="Parent Name" required>
+<input type="text" id="parent" placeholder="Parent Name" required>
 
-<input type="text" placeholder="Student Grade">
+<input type="text" id="grade" placeholder="Student Grade">
 
-<input type="tel" placeholder="WhatsApp Number" required>
+<input type="tel" id="phone" placeholder="WhatsApp Number" required>
 
-<select>
-
+<select id="program">
 <option>Select Program</option>
-
 <option>AI Future Skills</option>
-
 <option>Coding Bootcamp</option>
-
 </select>
 
 <button class="btn btn-primary">
@@ -602,12 +598,43 @@ answer.style.display==="block"?"none":"block";
 });
 
 </script>
+<script>
 
+const scriptURL = "https://script.google.com/macros/s/AKfycbwycQGv9WNSJPKwCIN-L0CldLqPsqpQHvJt3YqUVV6Nb5P0pW1SSmDuzpubNiwHB_BSKw/exec"
 
+document.getElementById("demoForm").addEventListener("submit", function(e){
+
+e.preventDefault()
+
+const data = {
+parent: document.getElementById("parent").value,
+grade: document.getElementById("grade").value,
+phone: document.getElementById("phone").value,
+program: document.getElementById("program").value
+}
+
+fetch(scriptURL,{
+method:"POST",
+body: JSON.stringify(data)
+})
+.then(response => response.text())
+.then(result => {
+
+alert("✅ Demo booked successfully!")
+
+document.getElementById("demoForm").reset()
+
+})
+.catch(error => {
+
+alert("❌ Error submitting form")
+
+console.error(error)
+
+})
+
+})
+
+</script>
 </body>
-
 </html>
-
-
-
-
